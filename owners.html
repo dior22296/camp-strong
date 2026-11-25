@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Owner's Suite — Camp Strong Performance × Pinnacle Tech</title>
+<style>
+  :root{ --red:#B83838; --red-bright:#e04848; --bg:#0a0a0a; --panel:#141414; --panel2:#1b1b1b; --line:#2a2a2a; --txt:#f2f2f2; --mut:#a8a8a8; --grn:#3fae6a; --amb:#d9a441; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{ background:var(--bg); color:var(--txt); font-family:-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif; line-height:1.55; }
+  .wrap{ max-width:1060px; margin:0 auto; padding:0 20px 70px; }
+  header{ text-align:center; padding:52px 20px 10px; }
+  header img{ height:74px; width:auto; }
+  .kicker{ color:var(--red-bright); letter-spacing:3px; font-size:12px; font-weight:700; text-transform:uppercase; margin-top:18px; }
+  h1{ font-size:clamp(28px,5vw,44px); line-height:1.12; margin:10px 0 8px; }
+  .sub{ color:var(--mut); max-width:640px; margin:0 auto; font-size:16px; }
+  .demobar{ margin:26px auto 0; max-width:820px; background:#241114; border:1px solid var(--red); border-radius:10px; padding:13px 18px; font-size:14px; color:#f3d9d9; }
+  .demobar b{ color:#fff; }
+  section{ margin-top:54px; }
+  h2{ font-size:clamp(22px,3.4vw,30px); margin-bottom:6px; }
+  h2 .n{ color:var(--red-bright); margin-right:8px; }
+  .lede{ color:var(--mut); margin-bottom:20px; max-width:720px; }
+  .board{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  @media (max-width:760px){ .board{ grid-template-columns:1fr; } }
+  .col{ background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:20px; }
+  .col h3{ font-size:15px; letter-spacing:2px; text-transform:uppercase; margin-bottom:14px; }
+  .col.live h3{ color:var(--grn); } .col.ready h3{ color:var(--amb); }
+  .item{ border-top:1px solid var(--line); padding:12px 0; }
+  .item:first-of-type{ border-top:none; }
+  .item b{ display:block; font-size:16px; }
+  .item p{ color:var(--mut); font-size:14px; margin-top:2px; }
+  .flip{ display:inline-block; margin-top:6px; font-size:12.5px; background:var(--panel2); border:1px solid var(--line); border-radius:20px; padding:3px 10px; color:#e8e8e8; }
+  .flip b{ display:inline; font-size:12.5px; color:var(--amb); }
+  .live .flip b{ color:var(--grn); }
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  @media (max-width:820px){ .grid2{ grid-template-columns:1fr; } }
+  .card{ background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:22px; }
+  .tag{ display:inline-block; font-size:11px; font-weight:700; letter-spacing:2px; padding:4px 10px; border-radius:20px; text-transform:uppercase; }
+  .tag.demo{ background:#3a2a10; color:var(--amb); border:1px solid var(--amb); }
+  .tag.sample{ background:#3a1114; color:#ff9c9c; border:1px solid var(--red); }
+  .card h3{ font-size:20px; margin:12px 0 6px; }
+  .card p{ color:var(--mut); font-size:14.5px; }
+  /* phone mock */
+  .phone{ background:#000; border:1px solid #333; border-radius:26px; padding:16px 14px; margin-top:16px; min-height:300px; display:flex; flex-direction:column; gap:9px; }
+  .msg{ max-width:86%; padding:10px 13px; border-radius:16px; font-size:14px; line-height:1.45; opacity:0; transform:translateY(6px); transition:all .45s ease; }
+  .msg.show{ opacity:1; transform:none; }
+  .msg.in{ background:#26262b; align-self:flex-start; border-bottom-left-radius:4px; }
+  .msg.out{ background:var(--red); align-self:flex-end; border-bottom-right-radius:4px; }
+  .msg.sys{ background:none; color:var(--mut); font-size:12px; align-self:center; text-align:center; max-width:100%; }
+  .btn{ display:inline-block; margin-top:16px; background:var(--red); color:#fff; border:none; font-size:15px; font-weight:700; padding:12px 22px; border-radius:10px; cursor:pointer; }
+  .btn:hover{ background:var(--red-bright); }
+  .btn.ghost{ background:none; border:1px solid var(--line); color:var(--txt); margin-left:8px; }
+  .seq{ margin-top:14px; display:none; }
+  .seq.show{ display:block; }
+  .seq div{ border-left:3px solid var(--red); padding:4px 0 4px 12px; margin-top:10px; font-size:14px; }
+  .seq div span{ color:var(--mut); display:block; font-size:12.5px; }
+  /* stars */
+  .stars{ font-size:40px; letter-spacing:6px; margin:14px 0 4px; cursor:pointer; user-select:none; }
+  .stars span{ color:#3a3a3a; transition:color .15s; }
+  .stars span.on{ color:#f5b301; }
+  .outcome{ display:none; margin-top:14px; border-radius:10px; padding:14px 16px; font-size:14.5px; }
+  .outcome.show{ display:block; }
+  .outcome.good{ background:#0f2417; border:1px solid var(--grn); }
+  .outcome.bad{ background:#241114; border:1px solid var(--red); }
+  .outcome p{ color:#e8e8e8; }
+  .chip{ display:inline-block; margin-top:8px; font-size:12.5px; background:var(--panel2); border:1px dashed var(--amb); color:var(--amb); border-radius:8px; padding:5px 10px; }
+  /* kpi */
+  .kpis{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:16px; }
+  @media (max-width:760px){ .kpis{ grid-template-columns:repeat(2,1fr); } }
+  .kpi{ background:var(--panel2); border:1px solid var(--line); border-radius:12px; padding:16px; }
+  .kpi .v{ font-size:30px; font-weight:800; }
+  .kpi .l{ color:var(--mut); font-size:13px; margin-top:2px; }
+  /* calendar */
+  .cal{ display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:16px; }
+  @media (max-width:760px){ .cal{ grid-template-columns:1fr; } }
+  .post{ background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:16px 18px; }
+  .post .d{ font-size:12px; letter-spacing:2px; color:var(--red-bright); font-weight:700; text-transform:uppercase; }
+  .post .pf{ float:right; font-size:12px; color:var(--mut); }
+  .post p{ font-size:14.5px; margin-top:8px; color:#e8e8e8; }
+  .post .cap{ color:var(--mut); font-size:13px; margin-top:6px; }
+  /* steps */
+  .steps{ counter-reset:st; }
+  .step{ display:flex; gap:14px; padding:13px 0; border-top:1px solid var(--line); }
+  .step:first-child{ border-top:none; }
+  .step .no{ counter-increment:st; flex:0 0 34px; height:34px; border-radius:50%; background:var(--red); color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; }
+  .step .no::before{ content:counter(st); }
+  .step b{ display:block; }
+  .step p{ color:var(--mut); font-size:14px; }
+  footer{ margin-top:64px; text-align:center; color:var(--mut); font-size:13px; border-top:1px solid var(--line); padding-top:24px; }
+  footer b{ color:#ddd; }
+</style>
+</head>
+<body>
+<header>
+  <img src="assets/logo-on-black.png" alt="Camp Strong Performance">
+  <div class="kicker">Camp Strong Performance × Pinnacle Tech</div>
+  <h1>The Owner's Suite</h1>
+  <p class="sub">Everything Pinnacle Tech has built for Camp Strong, on one page — what's live today, what flips on next, and live demonstrations of the systems that answer, follow up, and protect your rating while you're on the floor coaching.</p>
+  <div class="demobar"><b>How to read this page:</b> every system below is real and built. Anything not yet connected to a live account is labeled <b>DEMO</b> or <b>SAMPLE</b>, with the exact one item that turns it on. Nothing here pretends to be live when it isn't.</div>
+</header>
+<div class="wrap">
+
+<section>
+  <h2><span class="n">01</span>The full stack — status board</h2>
+  <p class="lede">Your website package and everything running behind it. Zen Planner stays your system of record — nothing here replaces it; every piece feeds leads toward it or reads from it.</p>
+  <div class="board">
+    <div class="col live">
+      <h3>● Live now</h3>
+      <div class="item"><b>New website</b><p>Published and public — programs, stories, facility info, directions, tap-to-call and tap-to-text.</p><span class="flip"><b>Status:</b> live on the web today; moves to camp-strong.com at the domain flip</span></div>
+      <div class="item"><b>Free assessment booking</b><p>Your existing Zen Planner assessment form, embedded exactly as it is today — submissions land in your Zen Planner like they always have.</p><span class="flip"><b>Status:</b> live, untouched</span></div>
+      <div class="item"><b>On-site assistant (chat)</b><p>Answers program, hours, and facility questions on the page and points visitors to the assessment form or your phone number.</p><span class="flip"><b>Status:</b> live</span></div>
+      <div class="item"><b>Privacy &amp; terms pages</b><p>Your existing legal text, carried over word for word.</p><span class="flip"><b>Status:</b> live</span></div>
+    </div>
+    <div class="col ready">
+      <h3>● Built &amp; ready — one input each</h3>
+      <div class="item"><b>Sofia — AI front desk (phone)</b><p>Answers calls, handles the common questions, captures every new lead for callback. Script and voice finished and tested.</p><span class="flip"><b>Flips on with:</b> a telephony account with your number on it</span></div>
+      <div class="item"><b>Missed-call text-back</b><p>The second a call is missed, the caller gets a text — then a timed follow-up sequence that stops the moment they reply or book. Engine tested end to end.</p><span class="flip"><b>Flips on with:</b> the same telephony account</span></div>
+      <div class="item"><b>Review engine</b><p>Private feedback first at member milestones. Happy members get the Google review ask; unhappy feedback comes to you privately, same day — never a public link.</p><span class="flip"><b>Flips on with:</b> your Google review link</span></div>
+      <div class="item"><b>KPI dashboard</b><p>Leads, assessments, show rate, missed calls recovered, reviews — weekly, monthly, yearly views. Built; preview below runs on sample numbers.</p><span class="flip"><b>Flips on with:</b> data exports from Zen Planner / BridgeAthletic / Google</span></div>
+      <div class="item"><b>Social content engine</b><p>Four posts a week across Instagram, Facebook, TikTok, and YouTube — drafted, captioned, and scheduled for your approval. Drafts below.</p><span class="flip"><b>Flips on with:</b> your go-ahead on the first batch</span></div>
+      <div class="item"><b>Google profile &amp; local search</b><p>Business profile upkeep, weekly Google posts, photo plan, and location pages for Winter Garden, Ocoee, Altamonte Springs, and Mount Dora.</p><span class="flip"><b>Flips on with:</b> manager access to your Google Business Profile</span></div>
+      <div class="item"><b>Paid ads (ready-to-run copy)</b><p>Google and Meta campaigns written and pointed at one conversion: the free assessment.</p><span class="flip"><b>Flips on with:</b> an ad budget decision</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">02</span>Meet Sofia — your AI front desk</h2>
+  <p class="lede">When you're on the floor, calls don't go to voicemail — Sofia answers as Camp Strong's front desk. She handles the questions every caller asks, captures new leads in order (name, mobile, program interest, athlete's age and sport), and hands anything sensitive — billing, complaints, emergencies — straight to a human. She never quotes membership pricing. Press play and hear how a call goes.</p>
+  <div class="card">
+    <span class="tag demo">Demo — simulated call, not a live line</span>
+    <h3>A call Sofia takes while you're coaching</h3>
+    <div class="phone" id="sofiaPhone">
+      <div class="msg sys">Camp Strong Performance · (352) 877-2186 · incoming call</div>
+    </div>
+    <button class="btn" id="sofiaBtn">▶ Play the call</button>
+    <button class="btn ghost" id="sofiaReset">Reset</button>
+    <p style="margin-top:14px">Her rules, in writing: warm and direct, no hype, no sales pressure. If she doesn't know an answer, she doesn't guess — she takes the caller's details and promises a callback from your staff. <span class="chip">Flips on with: a telephony account with (352) 877-2186 provisioned on it</span></p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">03</span>Missed-call text-back</h2>
+  <p class="lede">A missed call from a parent or an athlete is usually a lead calling the next gym on the list. This engine answers in seconds by text, then follows up on a schedule — and stops the instant the person replies, opts out, or books. No texts between 9 PM and 8 AM. Run the simulation:</p>
+  <div class="grid2">
+    <div class="card">
+      <span class="tag demo">Demo — simulation, nothing is sent</span>
+      <h3>The moment a call is missed</h3>
+      <div class="phone" id="tbPhone">
+        <div class="msg sys">Tuesday · 6:42 PM · missed call from (407) 555-0134</div>
+      </div>
+      <button class="btn" id="tbBtn">▶ Simulate the missed call</button>
+      <button class="btn ghost" id="tbReset">Reset</button>
+    </div>
+    <div class="card">
+      <span class="tag demo">Demo — the follow-up schedule</span>
+      <h3>If they don't reply, the sequence continues</h3>
+      <div class="seq show" style="display:block">
+        <div><b>Immediately</b><span>The text on the left fires within seconds of the missed call.</span></div>
+        <div><b>+2 hours</b><span>A short nudge with the assessment offer and the phone number.</span></div>
+        <div><b>Next morning</b><span>A fresh check-in during facility hours.</span></div>
+        <div><b>Day 1</b><span>Program information matched to what they asked about.</span></div>
+        <div><b>Day 3</b><span>A call plus a text — a human touch on top of the automation.</span></div>
+        <div><b>Day 7</b><span>One final message. After that, silence — the lead moves to the weekly follow-up list, not back into the sequence.</span></div>
+      </div>
+      <p style="margin-top:12px">Engine status: built and dry-run tested — quiet hours, opt-outs, and stop-on-reply all verified. It has never sent a real message. <span class="chip">Flips on with: the same telephony account as Sofia</span></p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">04</span>The review engine — try both paths</h2>
+  <p class="lede">At real milestones — first week complete, day 30, a measurable result, a program finished — members get a private check-in first, never a public review ask. Tap the stars and watch where each path goes. This is the exact logic the built engine runs.</p>
+  <div class="card">
+    <span class="tag demo">Demo — interactive, nothing is sent</span>
+    <h3>How was your first month at Camp Strong?</h3>
+    <div class="stars" id="stars"><span data-v="1">★</span><span data-v="2">★</span><span data-v="3">★</span><span data-v="4">★</span><span data-v="5">★</span></div>
+    <p>Tap a rating to see the path it takes.</p>
+    <div class="outcome good" id="outGood">
+      <p><b>4–5 stars → the Google path.</b> The member is thanked and invited to share it on Google — the one public ask, made only after a positive private response. Reviews build the rating that wins Apopka searches.</p>
+      <span class="chip">Ready for: your Google review link (from your Business Profile) — the button activates the moment it's pasted in</span>
+    </div>
+    <div class="outcome bad" id="outBad">
+      <p><b>1–3 stars → the private path.</b> The member gets a private feedback form and a follow-up from your staff. You get a same-day alert with what they said. There is <b>no review link anywhere in this path — by construction</b>, not by policy. Problems get fixed in private; only praise gets routed public.</p>
+      <span class="chip">Flips on with: your Google review link + where you want same-day alerts sent</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">05</span>Your numbers, every Monday</h2>
+  <p class="lede">The KPI dashboard turns Zen Planner, BridgeAthletic, and Google data into one page: leads by source, assessments booked and showed, missed calls recovered, review volume and rating — in weekly, monthly, and yearly views. The preview below shows the layout running on sample numbers.</p>
+  <div class="card">
+    <span class="tag sample">Sample data — layout preview only, not your real numbers</span>
+    <div class="kpis">
+      <div class="kpi"><div class="v">18</div><div class="l">New leads this week</div></div>
+      <div class="kpi"><div class="v">11</div><div class="l">Assessments booked</div></div>
+      <div class="kpi"><div class="v">82%</div><div class="l">Assessment show rate</div></div>
+      <div class="kpi"><div class="v">6</div><div class="l">Missed calls recovered by text-back</div></div>
+      <div class="kpi"><div class="v">4.9★</div><div class="l">Google rating (sample)</div></div>
+      <div class="kpi"><div class="v">94%</div><div class="l">Leads answered within 15 minutes</div></div>
+    </div>
+    <p style="margin-top:14px">The full dashboard is built with all three period views. It goes real the day we plug in your exports. <span class="chip">Flips on with: Zen Planner / BridgeAthletic / Google data access</span></p>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">06</span>The social engine — your first drafts</h2>
+  <p class="lede">Four posts a week, written from your real story — 25 years of NBA and collegiate strength &amp; conditioning — and your real members' results. Every caption ends with one clear next step: the free assessment. These are actual drafts from your starter pack, awaiting your approval. Nothing posts without it.</p>
+  <div class="cal">
+    <div class="post"><span class="pf">Instagram · Facebook</span><div class="d">Week 1 · Monday — Positioning</div><p>"This isn't a gym. This is a performance facility — built on 25 years of NBA and collegiate strength &amp; conditioning experience, right here in Apopka. It's not motivation. It's not hype. It's structured, intentional development."</p><p class="cap">Ends with: "Start with a free assessment. Link in bio or call 352-877-2186." · #Apopka #AthleteDevelopment #SportsPerformance #CampStrong</p></div>
+    <div class="post"><span class="pf">Instagram · TikTok</span><div class="d">Week 1 · Wednesday — Strength</div><p>"Strength is the foundation of all athletic performance. We train force production, structural balance, progressive overload, and movement efficiency — in that order, on purpose."</p><p class="cap">Ends with: "Book a free assessment and let's build yours. 352-877-2186." · #StrengthTraining #AthleteDevelopment #Apopka</p></div>
+    <div class="post"><span class="pf">Instagram · Facebook</span><div class="d">Week 1 · Friday — Real result</div><p>"Camp Strong has been a life changing experience." With Coach Troy's guidance, Mike Etheridge lost over 70 pounds — he doesn't just feel better, he moves better, with more energy than he's had in years.</p><p class="cap">Ends with: "Adult Performance. Structured, coached, real. Your assessment is free." · #AdultPerformance #RealResults #Apopka</p></div>
+    <div class="post"><span class="pf">Instagram · YouTube</span><div class="d">Week 1 · Saturday — Speed</div><p>"Speed wins games. First-step explosiveness. Acceleration mechanics. Change of direction. Sprint technique under fatigue. It's trained here, not hoped for."</p><p class="cap">Ends with: "Free assessments at camp-strong.com." · #SpeedTraining #Agility #SportsPerformance #Apopka</p></div>
+  </div>
+  <p class="lede" style="margin-top:16px">Behind these: a 10-caption starter pack, a monthly caption wave, a Google post bank, and ready-to-run ad copy — all written, all waiting on your approval rhythm: drafts Friday, your sign-off by Monday.</p>
+</section>
+
+<section>
+  <h2><span class="n">07</span>What flips everything on — your short list</h2>
+  <p class="lede">Five items, all on your side of the table. Each one lights up a system that's already built and tested.</p>
+  <div class="card steps">
+    <div class="step"><div class="no"></div><div><b>The domain flip</b><p>camp-strong.com points at the new site. The domain lives in a Cloudflare account on your side — a two-minute sign-in together and the switch is done the same day.</p></div></div>
+    <div class="step"><div class="no"></div><div><b>A telephony account for your number</b><p>One account setup with (352) 877-2186 provisioned on it turns on Sofia and the missed-call text-back together.</p></div></div>
+    <div class="step"><div class="no"></div><div><b>Your Google review link</b><p>One link from your Google Business Profile activates the review engine's public path — plus manager access to the profile turns on the local-search work.</p></div></div>
+    <div class="step"><div class="no"></div><div><b>Where alerts go</b><p>The phone or inbox that should get same-day private feedback alerts from the review engine.</p></div></div>
+    <div class="step"><div class="no"></div><div><b>Data access for real numbers</b><p>Exports or access from Zen Planner, BridgeAthletic, and Google replace the sample numbers in your Monday dashboard with the real ones.</p></div></div>
+  </div>
+</section>
+
+<footer>
+  <p>Prepared for <b>Coach Troy Morris · Camp Strong Performance</b>, Apopka, FL</p>
+  <p style="margin-top:6px">Built by <b>Pinnacle Tech</b> · Orlando, FL · Questions: Solomon Bradshaw, (407) 448-6192</p>
+</footer>
+</div>
+
+<script>
+(function(){
+  function shower(phoneId, script, btnId, resetId){
+    var phone=document.getElementById(phoneId), btn=document.getElementById(btnId), rst=document.getElementById(resetId);
+    var timers=[];
+    function clearAll(){ timers.forEach(clearTimeout); timers=[]; }
+    function reset(){ clearAll(); phone.querySelectorAll('.msg:not(.sys)').forEach(function(m){ m.remove(); }); btn.disabled=false; btn.textContent='▶ Play again'; }
+    btn.addEventListener('click', function(){
+      reset(); btn.disabled=true; btn.textContent='Playing…';
+      var t=400;
+      script.forEach(function(m){
+        timers.push(setTimeout(function(){
+          var d=document.createElement('div'); d.className='msg '+m[0]; d.textContent=m[1];
+          phone.appendChild(d); requestAnimationFrame(function(){ d.classList.add('show'); });
+          phone.scrollTop=phone.scrollHeight;
+        }, t));
+        t += m[2]||1700;
+      });
+      timers.push(setTimeout(function(){ btn.disabled=false; btn.textContent='▶ Play again'; }, t));
+    });
+    rst.addEventListener('click', reset);
+  }
+  shower('sofiaPhone', [
+    ['out','Thank you for calling Camp Strong Performance, Apopka\u2019s home for athlete development. This is Sofia at the front desk. How can I help you today?',2600],
+    ['in','Hi — my son is a sophomore point guard. We\u2019re looking for speed and strength training. What do you offer?',2600],
+    ['out','For athletes, the first step is a free assessment with Coach Troy — he builds the program from there: strength, speed and agility, power, and staying healthy through the season. Can I take your name and mobile number so the staff can get his assessment set up?',3400],
+    ['in','Sure — Dana Whitfield, 407-555-0134. He\u2019s 16, plays at Apopka High.',2200],
+    ['out','Got it, Dana — Dana Whitfield, 407-555-0134, athlete assessment for your 16-year-old. A coach will call you back to lock in a time. Anything else I can help with?',3000],
+    ['in','That\u2019s it, thanks!',1200],
+    ['out','Thank you for calling Camp Strong. We\u2019ll be in touch shortly.',1600],
+    ['sys','Lead captured: name · mobile · program interest · athlete age & sport — routed to staff for callback. Sofia quoted no pricing and promised nothing she can\u2019t keep.',1200]
+  ], 'sofiaBtn', 'sofiaReset');
+  shower('tbPhone', [
+    ['sys','6:42 PM — call rings out while the coaches are on the floor. No voicemail. The engine fires:',1400],
+    ['out','Hi, this is Camp Strong Performance in Apopka — sorry we missed your call. Our coaches are on the floor with athletes. How can we help you? If you\u2019re asking about training, the first step is a free assessment with Coach Troy. Reply here and we\u2019ll get you set up. — Camp Strong, 352-877-2186',3200],
+    ['sys','6:47 PM — the caller replies:',2200],
+    ['in','Hi! Do you train middle schoolers? My daughter is 12.',1800],
+    ['sys','Sequence stopped — a human conversation takes over from here. Total time from missed call to first contact: under 5 minutes.',1400]
+  ], 'tbBtn', 'tbReset');
+  var stars=document.getElementById('stars');
+  stars.addEventListener('click', function(e){
+    var v=parseInt(e.target.getAttribute('data-v'),10); if(!v) return;
+    stars.querySelectorAll('span').forEach(function(s){ s.classList.toggle('on', parseInt(s.getAttribute('data-v'),10)<=v); });
+    document.getElementById('outGood').classList.toggle('show', v>=4);
+    document.getElementById('outBad').classList.toggle('show', v<=3);
+  });
+})();
+</script>
+</body>
+</html>
